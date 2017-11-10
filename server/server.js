@@ -34,6 +34,13 @@ app.get('/listingPage', function(req, res) {
 	});
 });
 
+app.get('/propertyDetail/:id', function(req, res) {
+	var id = req.params.id; 
+	dbFunctions.getPropertyById(id, function(result){
+	res.render('pages/propertyDetails', {details: result.data});
+	});
+});
+
 // about page 
 app.get('/about', function(req, res) {
 	res.render('pages/about');
@@ -80,6 +87,14 @@ app.post("/api/buyProperty",(req,res)=>{
     });
     
 });
+// Get holdings by user
+app.get('/api/get_holding/:userid', (req, res) => {
+	var userid = req.params.userid;
+	dbFunctions.getHoldingsByUser(userid, function(result) {
+		res.send(result);
+	});
+});
+
 // Sample post
 /*
 app.post("/compileCode", (req, res) => {

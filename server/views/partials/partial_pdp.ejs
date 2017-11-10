@@ -1,0 +1,114 @@
+    <div id="all">
+        
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>Property Details Page</h1>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="heading">
+                            <h2>About the Property</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row portfolio-project">
+
+                    <section>
+
+                        <div class="col-sm-7">
+                            <div class="project owl-carousel">
+                                <div class="item">
+                                    <img src="<%= details[0].photo_url %>" alt="" class="img-responsive">
+                                </div>
+                            </div>
+                            <!-- /.project owl-slider -->
+
+                        </div>
+
+                         <script>
+                            var price = <%= details[0].price  %>;  
+                            var unitprice = <%= details[0].unit_price  %>;
+                            var price = formatAmount(price); 
+                            var uprice = formatAmount(unitprice); 
+                            var utransaction = <%= details[0].units %> - <%= details[0].available_units %>
+                         </script>
+
+                        <div class="col-sm-3">
+                            <div class="project-more">
+                                <h4>Address</h4>
+                                <p><%= details[0].address %></p>
+                                <h4>Size</h4>
+                                <p><%= details[0].size %> sq.ft</p>
+                                <h4>Price</h4>
+                                <p> $ <script> document.write(price) </script></p>
+                                <h4>Unit Price</h4>
+                                <p> $ <script> document.write(uprice) </script></p>
+                                <h4>Total Units</h4>
+                                <p><%= details[0].units %></p>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="#"> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                &nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon glyphicon-shopping-cart"></span> Buy &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                            </button> </a>
+                            <div class="project-more">
+                            <h4>Units in Transaction</h4>
+                                <p> <script> document.write(utransaction) </script></p>
+                                 <h4>Units available</h4>
+                                <p><%= details[0].available_units %></p>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Purchasing Options</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <label> Number of Units: &nbsp&nbsp</label><input type="text" id="quantity" />
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Buy</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                    </section>
+
+                    <section>
+
+                        <div class="col-sm-12">
+
+                            <div class="heading">
+                                <h3>Property description</h3>
+                            </div>
+
+                            <p> <%= details[0].description %></p>
+                        </div>
+                    </section>
+
+                </div>
+
+                
+            </div>
+     
+        </div>
+    </div>
