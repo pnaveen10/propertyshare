@@ -27,9 +27,12 @@
                     <div class="row portfolio">
 
 
-                    <% listings.forEach(function(listing) { %>
-
-                        <div class="col-sm-6 col-md-3">                        
+                      <% listings.forEach(function(listing) { %>
+                      
+                         <div class="col-sm-4">
+                            <div class="property-card">
+                         <p class="price"><label> Unit Price:</label> <i class="fa fa-usd" aria-hidden="true"></i> <%= listing.unit_price %> </p>
+                         <p> <i class="fa fa-map-marker" aria-hidden="true"></i> <%= listing.state %> </p>
                             <div class="box-image">
                                 <div class="image">
                                     <img src= <%= listing.photo_url %> alt="" class="img-responsive">
@@ -41,57 +44,18 @@
                                 <div class="text">
                                     <p class="hidden-sm hidden-lg hidden-md"> <%= listing.description %> </p>
                                     <p class="buttons">
-                                        <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                        <a href="#" class="btn btn-template-transparent-primary">View</a>
                                         <a href="#" class="btn btn-template-transparent-primary">Buy Units</a>
                                     </p>
                                 </div>
                             </div>
-                            <p> <%= listing.address %>
-                            </p>
-                            <!-- /.box-image -->
+                             <p> <i class="fa fa-map-marker" aria-hidden="true"></i> <%= listing.address %> </p>
                         </div>
-                    <% }); %>
-                    
+                    </div>
+                      <% }); %>
 
                     </div>
-
                 </section>
-
             </div>
-            <!-- /.container -->
-
-            
-            <!-- /.bar -->
-
-            
-
-
         </div>
-        <!-- /#content -->
-
-        <!-- *** GET IT ***
-_________________________________________________________ -->
-
-        
-
-
-        <!-- *** GET IT END *** -->
-
-
-        <!-- *** FOOTER ***
-_________________________________________________________ -->
-
-       
-        <!-- /#footer -->
-
-        <!-- *** FOOTER END *** -->
-
-        <!-- *** COPYRIGHT ***
-_________________________________________________________ -->
-        <!-- /#copyright -->
-
-        <!-- *** COPYRIGHT END *** -->
-
-
-
     </div>
