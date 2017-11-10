@@ -1156,7 +1156,7 @@ fieldset[disabled] .btn-template-primary.active {
   width: 100%;
   height: 100%;
   background: #ff5c39;
-  opacity: 0.9;
+  opacity: 0.6;
   filter: alpha(opacity=90);
 }
 .home-carousel .owl-carousel {
@@ -2603,7 +2603,7 @@ fieldset[disabled] .btn-template-primary.active {
 #copyright {
   background: #ff5c39;
   color: #ccc;
-  padding: 50px 0;
+  padding: 0px;
   font-size: 12px;
   line-height: 28px;
 }

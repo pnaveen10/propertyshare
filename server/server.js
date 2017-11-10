@@ -3,7 +3,6 @@ var pg = require('pg');
 var bodyParser = require('body-parser');
 var app = express();
 var path = require('path');
-var async = require('async');
 
 app.use(bodyParser.json());
 
@@ -24,7 +23,16 @@ app.get('/', function(req, res) {
 });
 
 app.get('/listingPage', function(req, res) {
-	res.render('pages/listingPage');
+	getProperties(function(result){
+		result = {
+			data: [
+				{
+					size: "100"
+				}
+			]
+		}
+	res.render('pages/listingPage', {listings: result.data});
+	});
 });
 
 // about page 
