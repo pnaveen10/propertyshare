@@ -27,7 +27,9 @@
                     <div class="row portfolio">
 
 
-                      <% listings.forEach(function(listing) { %>
+                      <% listings.forEach(function(listing) {
+                        if(listing.status != "SOLD") {
+                       %>
                       
                          <div class="col-sm-4">
                             <div class="property-card">
@@ -52,7 +54,7 @@
                              <p> <i class="fa fa-map-marker" aria-hidden="true"></i> <%= listing.address %> </p>
                         </div>
                     </div>
-                      <% }); %>
+                      <% } }); %>
 
                     </div>
                 </section>
