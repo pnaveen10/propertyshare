@@ -34,6 +34,13 @@ app.get('/listingPage', function(req, res) {
 	});
 });
 
+app.get('/propertyDetail/:id', function(req, res) {
+	var id = req.params.id; 
+	dbFunctions.getPropertyById(id, function(result){
+	res.render('pages/propertyDetails', {details: result.data});
+	});
+});
+
 // about page 
 app.get('/about', function(req, res) {
 	res.render('pages/about');
