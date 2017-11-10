@@ -11,7 +11,7 @@ app.use('/public', express.static('public'))
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
-var conString = "postgres://postgres:postgres@localhost:5432/xomeshare";
+var conString = "postgres://postgres:postgres@34.210.56.67:5432/xomeshare";
 
 app.listen(8080, function() {
 	console.log('listening on 8080')
