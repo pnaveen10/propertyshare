@@ -41,6 +41,13 @@ app.get('/propertyDetail/:id', function(req, res) {
 	});
 });
 
+app.get('/holdings/:userid', function(req, res) {
+	var userid = req.params.userid;
+	dbFunctions.getHoldingsByUser(userid, function(result) {
+		res.render('pages/holdingDetails', result);
+	});
+});
+
 // about page 
 app.get('/about', function(req, res) {
 	res.render('pages/about');
@@ -66,6 +73,27 @@ app.get('/api/get_property/:id', (req, res) => {
 	});
 });
 
+// search listed properties based on state
+app.get('/api/search_property/:state',(req,res)=>{
+    var state = req.params.state.toUpperCase();
+    dbFunctions.searchPropertyByState(state,function(result){
+       res.send(result); 
+    });
+});
+
+
+// buy property 
+app.post("/api/buyProperty",(req,res)=>{
+    
+    var userId = req.body.userId;
+    var propertyId = req.body.propertyId;
+    
+    dbFunctions.buyProperty(userId,propertyId,function(result){
+        console.log(result);
+        res.send(result);
+    });
+    
+});
 // Get holdings by user
 app.get('/api/get_holding/:userid', (req, res) => {
 	var userid = req.params.userid;
