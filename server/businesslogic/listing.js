@@ -45,7 +45,7 @@ module.exports = {
 					client.end();
 				}
 				else {
-					var query = "select prop.size, prop.rooms, prop.price, prop.units, prop.photo_url, prop.address, prop.state, prop.zip, prop.unit_in_transac, prop.available_units, prop.unit_price, prop.status, prop.description, temp.sumunits units_bought, temp.sumamount holdamount from (select hold.user_id, hold.property_id, sum(hold.amount) sumamount, sum(hold.units_bought) sumunits from holdings hold group by hold.user_id, hold.property_id) temp join user_detail u on u.id = temp.user_id join property prop on prop.id = temp.property_id where u.id='" + userId + "'";
+					var query = "select prop.id property_id, prop.size, prop.rooms, prop.price, prop.units, prop.photo_url, prop.address, prop.state, prop.zip, prop.unit_in_transac, prop.available_units, prop.unit_price, prop.status, prop.description, temp.sumunits units_bought, temp.sumamount holdamount from (select hold.user_id, hold.property_id, sum(hold.amount) sumamount, sum(hold.units_bought) sumunits from holdings hold group by hold.user_id, hold.property_id) temp join user_detail u on u.id = temp.user_id join property prop on prop.id = temp.property_id where u.id='" + userId + "'";
 
 					client.query(query, function(err, result) {
 						if (err) {
