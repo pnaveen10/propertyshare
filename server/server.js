@@ -7,6 +7,8 @@ var async = require('async');
 
 app.use(bodyParser.json());
 
+app.use('/public', express.static('public'))
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
@@ -19,6 +21,10 @@ app.listen(8080, function() {
 // index page 
 app.get('/', function(req, res) {
 	res.render('pages/index');
+});
+
+app.get('/listingPage', function(req, res) {
+	res.render('pages/listingPage');
 });
 
 // about page 
