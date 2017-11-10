@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="row">
+	<div class="col-sm-12 col-md-10 col-md-offset-1">
+		<table class="table table-hover">
+		<tbody>
+			<% data.forEach(function(listing) { %>
+			<tr>
+			<td class="col-sm-2 col-md-4">
+				<div>
+				<a class="thumbnail pull-left" href="#"> <img class="media-object" src="<%= listing.photo_url %>" style="height: 120px;"> </a>
+				</div>
+			</td>
+			<td class="col-sm-3">
+				<h5><%= listing.address  %></h4>
+				<h5><%= listing.state %> <%= listing.zip %> </h5>
+				<span><strong>Size:</strong> <%= listing.size %> sq ft, <strong>Rooms:</strong> <%= listing.rooms %></span>
+			</td>
+			<td class="col-sm-2" style="text-align: center">
+				<h5>Shares Owned</h5>
+				<h4 class="text-success"><%= listing.units_bought %></h4>
+			</td>
+			<td class="col-sm-2 col-md-6" style="text-align: center">
+				<h5>Total Shares</h5>
+				<h4 class="text-success"><%= listing.units %></h4>
+			</td>
+			<td class="col-sm-3 text-center">
+				<strong>Downloads</strong></br></br>
+				<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-cloud-download"></span> Smart Contract
+							</button></br></br>
+				<button type="button" class="btn btn-default">
+								<span class="glyphicon glyphicon-cloud-download"></span> Property Details
+							</button></br></br>
+			</td>
+			</tr>
+			<% }); %>
+		</tbody>
+		</table>
+	</div>
+	</div>
+</div>

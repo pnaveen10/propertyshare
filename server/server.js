@@ -41,6 +41,13 @@ app.get('/propertyDetail/:id', function(req, res) {
 	});
 });
 
+app.get('/holdings/:userid', function(req, res) {
+	var userid = req.params.userid;
+	dbFunctions.getHoldingsByUser(userid, function(result) {
+		res.render('pages/holdingDetails', result);
+	});
+});
+
 // about page 
 app.get('/about', function(req, res) {
 	res.render('pages/about');
