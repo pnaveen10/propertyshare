@@ -59,6 +59,14 @@ app.get('/api/get_property/:id', (req, res) => {
 	});
 });
 
+// Get holdings by user
+app.get('/api/get_holding/:userid', (req, res) => {
+	var userid = req.params.userid;
+	dbFunctions.getHoldingsByUser(userid, function(result) {
+		res.send(result);
+	});
+});
+
 // Sample post
 /*
 app.post("/compileCode", (req, res) => {
