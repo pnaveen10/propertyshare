@@ -59,6 +59,27 @@ app.get('/api/get_property/:id', (req, res) => {
 	});
 });
 
+// search listed properties based on state
+app.get('/api/search_property/:state',(req,res)=>{
+    var state = req.params.state.toUpperCase();
+    dbFunctions.searchPropertyByState(state,function(result){
+       res.send(result); 
+    });
+});
+
+
+// buy property 
+app.post("/api/buyProperty",(req,res)=>{
+    
+    var userId = req.body.userId;
+    var propertyId = req.body.propertyId;
+    
+    dbFunctions.buyProperty(userId,propertyId,function(result){
+        console.log(result);
+        res.send(result);
+    });
+    
+});
 // Sample post
 /*
 app.post("/compileCode", (req, res) => {
