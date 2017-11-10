@@ -26,9 +26,10 @@
 
                     <div class="row portfolio">
 
+
                     <% listings.forEach(function(listing) { %>
 
-                        <div class="col-sm-6 col-md-3">
+                        <div class="col-sm-6 col-md-3">                        
                             <div class="box-image">
                                 <div class="image">
                                     <img src= <%= listing.photo_url %> alt="" class="img-responsive">
@@ -45,9 +46,12 @@
                                     </p>
                                 </div>
                             </div>
+                            <p> <%= listing.address %>
+                            </p>
                             <!-- /.box-image -->
                         </div>
                     <% }); %>
+                    
 
                     </div>
 
