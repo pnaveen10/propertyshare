@@ -6,7 +6,13 @@ var path = require('path');
 
 var dbFunctions = require('./businesslogic/listing.js');
 
-app.use(bodyParser.json());
+var userInfo = {
+	isloggedin: false,
+	data: {}
+};
+
+//app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 app.use('/public', express.static('public'))
 
@@ -19,32 +25,67 @@ app.listen(8080, function() {
 	console.log('listening on 8080')
 })
 
+var users = {
+	naveen: {
+		id: 1,
+		name: "Naveen"
+	},
+	subi: {
+		id: 2,
+		name: "Subi"
+	}
+};
+
 // #############################################
 // Start page redirect section
 // #############################################
 
 // index page 
 app.get('/', function(req, res) {
-	res.render('pages/index');
+	if (userInfo.isloggedin) {
+		res.render('pages/index', {user: userInfo});
+	}
+	else {
+		res.render('pages/login', {user: userInfo});
+	}
+});
+
+app.post('/doLogin', function(req, res){
+	var name = req.body.username;
+	var user = users[name];
+	if (user) {
+		userInfo.isloggedin = true;
+		userInfo.data = user;
+		res.render('pages/index', {user: userInfo});
+	}
+	else {
+		res.render('pages/login', {user: userInfo});
+	}
+});
+
+app.get('/logout', function(req, res){
+	userInfo.isloggedin = false;
+	userInfo.data = {};
+	res.redirect('/');
 });
 
 app.get('/listingPage', function(req, res) {
 	dbFunctions.getProperties('', function(result){
-	res.render('pages/listingPage', {listings: result.data});
+	res.render('pages/listingPage', {listings: result.data, user: userInfo});
 	});
 });
 
 app.get('/propertyDetail/:id', function(req, res) {
 	var id = req.params.id; 
 	dbFunctions.getPropertyById(id, function(result){
-	res.render('pages/propertyDetails', {details: result.data});
+	res.render('pages/propertyDetails', {details: result.data, user: userInfo});
 	});
 });
 
 app.get('/holdings/:userid', function(req, res) {
 	var userid = req.params.userid;
 	dbFunctions.getHoldingsByUser(userid, function(result) {
-		res.render('pages/holdingDetails', result);
+		res.render('pages/holdingDetails', {data: result, user: userInfo});
 	});
 });
 
@@ -55,10 +96,10 @@ app.get('/about', function(req, res) {
 
 app.get('/getProperty/:id', function(req, res) {
 	var id = req.params.id;
-	var uid = "1";
+	var uid = userInfo.data.id;
 	 dbFunctions.buyProperty(uid,id,function(result){
 	 	dbFunctions.getHoldingsByUser(uid, function(result){
-	 		res.render('pages/holdingDetails',result); 
+	 		res.render('pages/holdingDetails', {data: result, user: userInfo}); 
 	 	});
     });
 });

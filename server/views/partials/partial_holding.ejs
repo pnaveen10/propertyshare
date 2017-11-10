@@ -1,41 +1,60 @@
-<div class="container">
-	<div class="row">
-	<div class="col-sm-12 col-md-10 col-md-offset-1">
-		<table class="table table-hover">
-		<tbody>
-			<% data.forEach(function(listing) { %>
-			<tr>
-			<td class="col-sm-2 col-md-4">
-				<div>
-				<a class="thumbnail pull-left" href="#"> <img class="media-object" src="<%= listing.photo_url %>" style="height: 120px;"> </a>
+<div id="all">
+	<div id="heading-breadcrumbs">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<h1>My Holdings</h1>
 				</div>
-			</td>
-			<td class="col-sm-3">
-				<h5><%= listing.address  %></h4>
-				<h5><%= listing.state %> <%= listing.zip %> </h5>
-				<span><strong>Size:</strong> <%= listing.size %> sq ft, <strong>Rooms:</strong> <%= listing.rooms %></span>
-			</td>
-			<td class="col-sm-2" style="text-align: center">
-				<h5>Shares Owned</h5>
-				<h4 class="text-success"><%= listing.units_bought %></h4>
-			</td>
-			<td class="col-sm-2 col-md-6" style="text-align: center">
-				<h5>Total Shares</h5>
-				<h4 class="text-success"><%= listing.units %></h4>
-			</td>
-			<td class="col-sm-3 text-center">
-				<strong>Downloads</strong></br></br>
-				<button type="button" class="btn btn-default">
-								<span class="glyphicon glyphicon-cloud-download"></span> Smart Contract
-							</button></br></br>
-				<button type="button" class="btn btn-default">
-								<span class="glyphicon glyphicon-cloud-download"></span> Property Details
-							</button></br></br>
-			</td>
-			</tr>
-			<% }); %>
-		</tbody>
-		</table>
+			</div>
+		</div>
 	</div>
+	<div class="container">
+		
+		<div class="row">
+		<div class="col-sm-12 col-md-10 col-md-offset-1">
+			<table class="table table-striped">
+			<tbody>
+				<% data.data.forEach(function(listing) { %>
+				<tr>
+				<td class="col-sm-2 col-md-4">
+					<div>
+					<a class="thumbnail pull-left" href="/propertyDetail/<%= listing.property_id %>"> <img class="media-object" src="<%= listing.photo_url %>" style="height: 120px;"> </a>
+					</div>
+				</td>
+				<td class="col-sm-3">
+					<h5><%= listing.address  %></h4>
+					<h5><%= listing.state %> <%= listing.zip %> </h5>
+					<div><strong>Size:</strong> <%= listing.size %> sq ft</div>
+					<div><strong>Rooms:</strong> <%= listing.rooms %></div>
+				</td>
+				<td class="col-sm-2" style="text-align: center">
+					<h5>Amount Invested</h5>
+					<h4 class="text-success">$<%= listing.holdamount %></h4>
+					<div>&nbsp;</div>
+					<h6>Total Property Units</h6>
+					<h6 class="text-success"><%= listing.units %></h6>
+				</td>
+				<td class="col-sm-2 col-md-6" style="text-align: center">
+					<h5>Units Owned</h5>
+					<h4 class="text-success"><%= listing.units_bought %></h4>
+					<button type="button" class="btn btn-danger" disabled=disabled>
+						<span class="glyphicon glyphicon-ok-sign"></span> Sell Units
+					</button>
+					<div class="small">*units are in holding period</div>
+				</td>
+				<td class="col-sm-3 text-center">
+					<strong>Downloads</strong></br></br>
+					<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-cloud-download"></span> Smart Contract
+								</button></br></br>
+					<button type="button" class="btn btn-default">
+									<span class="glyphicon glyphicon-cloud-download"></span> Property Details
+								</button></br></br>
+				</td>
+				</tr>
+				<% }); %>
+			</tbody>
+			</table>
+		</div>
+		</div>
 	</div>
-</div>

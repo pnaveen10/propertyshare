@@ -519,10 +519,15 @@ body.boxed .navbar-affixed-top.affix {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 6px 12px;
-  font-size: 20px;
+  font-size: 12px;
   line-height: 1.42857143;
   border-radius: 0;
 }
+
+.btn.buy {
+  font-size: 22px;
+}
+
 .input-group .btn {
   font-size: 14px;
 }

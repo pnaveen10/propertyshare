@@ -8,8 +8,13 @@ _________________________________________________________ -->
                         <div class="col-xs-14">
 
                             <div class="login">
-                                <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
-                                <a href="#"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
+				<% if(user.isloggedin == true) { %>
+					<a href="/holdings/<%= user.data.id %>">My Holdings</a>
+					<span class="hidden-xs text-uppercase"><%= user.data.name %></span>
+					<a href="/logout"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign out</span></a>
+				<%} else { %>
+	                                <a href="/login"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
+				<% } %>
                             </div>
 
                         </div>
@@ -29,7 +34,7 @@ _________________________________________________________ -->
                     <div class="container">
                         <div class="navbar-header">
 
-                            <a class="navbar-brand home" href="index.html" style="padding-top: 0px;padding-left: 0px;">
+                            <a class="navbar-brand home" href="/" style="padding-top: 0px;padding-left: 0px;">
                                 <img src="/public/img/Xome1.png" alt="Universal logo" class="hidden-xs hidden-sm" height="62">
                                 <img src="/public/img/Xome1.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only" height="62">Xome SHARE - go to homepage</span>
                             </a>
