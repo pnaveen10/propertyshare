@@ -53,6 +53,17 @@ app.get('/about', function(req, res) {
 	res.render('pages/about');
 });
 
+app.get('/getProperty/:id', function(req, res) {
+	var id = req.params.id;
+	var uid = "1";
+	 dbFunctions.buyProperty(uid,id,function(result){
+	 	dbFunctions.getHoldingsByUser(uid, function(result){
+	 		res.render('pages/holdingDetails',result); 
+	 	});
+    });
+});
+
+
 // ###############################################
 // Start API Section
 // ###############################################

@@ -132,7 +132,6 @@ module.exports = {
                     client.end();
                        
                    }else{
-                       console.log("Available units "+result.rows[0].available_units);
                        if(result.rows[0].available_units > 0)
                            {
                                client.query("insert into holdings(PROPERTY_ID,USER_ID,AMOUNT,UNITS_BOUGHT,STATUS,TIMESTAMP) values($1,$2,$3,$4,$5,$6) RETURNING id",[propertyId,userId,result.rows[0].unit_price,1,'INPROGRESS',new Date()], function(err,insertResult){
@@ -142,7 +141,7 @@ module.exports = {
                                        client.end();
                                    } else {
                                        console.log("come on baby1");
-                                       completePropertyTransaction(propertyId,userId,insertResult.rows[0].id,client,callback);
+                                       completePropertyTransaction(propertyId,userId,insertResult.rows[0].id,client,callback,);
                                    }
                                });
                            }
@@ -160,7 +159,8 @@ module.exports = {
 
 function completePropertyTransaction(propertyId,userId,holdingId,client,callback)
     {
-        client.query("UPDATE property SET available_units= available_units - 1 where id=($1)",[propertyId],function(err,result){
+        
+        client.query("UPDATE property SET available_units= available_units - 1, status= (case when available_units>1 THEN  'LISTED' ELSE 'SOLD' END) where id=($1)",[propertyId],function(err,result){
             if(err){
                 console.log("Error in /api/buyProperty/"+err);
                 callback({error:err, data: []});
