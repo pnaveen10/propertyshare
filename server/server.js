@@ -34,13 +34,14 @@ app.get('/about', function(req, res) {
 
 // Get Property list
 app.get('/api/get_properties', (req, res) => {
-	getProperties(function(result) {
+	var getstatus = req.query.status;
+	getProperties(getstatus, function(result) {
 		res.send(result);
 	});
 });
 
 // Get Properties
-function getProperties(callback) {
+function getProperties(getstatus, callback) {
 	var client = new pg.Client(conString);
 	client.connect(function(err) {
 		if (err) {
@@ -49,7 +50,11 @@ function getProperties(callback) {
 			client.end();
 		}
 		else {
-			client.query('select * from property', function(err, result) {
+			var query = 'select * from property';
+			if (getstatus) {
+				query = "select * from property where status='" + getstatus + "'";
+			}
+			client.query(query, function(err, result) {
 				if (err) {
 					console.log(err);
 					callback({error:err, data: []});
