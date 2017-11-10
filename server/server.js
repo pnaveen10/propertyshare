@@ -6,11 +6,26 @@ var path = require('path');
 
 app.use(bodyParser.json());
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
 var conString = "postgres://postgres:postgres@localhost:5432/xomeshare";
 
 app.listen(8080, function() {
-  console.log('listening on 8080')
+	console.log('listening on 8080')
 })
+
+// index page 
+app.get('/', function(req, res) {
+	res.render('pages/index');
+});
+
+// about page 
+app.get('/about', function(req, res) {
+	res.render('pages/about');
+});
+
+
 
 // React PROD build
 // app.use('/static', express.static(path.resolve(__dirname + '\\..\\client\\build\\static')));
@@ -19,10 +34,10 @@ app.listen(8080, function() {
 // })
 
 // React DEV build
-app.use('/dist', express.static(path.resolve(__dirname + '/../client/dist')));
-app.get('/', (req, res) => {
-	res.sendFile(path.resolve(__dirname + '/../client/dist/devindex.html'));
-})
+//app.use('/dist', express.static(path.resolve(__dirname + '/../client/dist')));
+//app.get('/', (req, res) => {
+//	res.sendFile(path.resolve(__dirname + '/../client/dist/devindex.html'));
+//})
 
 
 // Sample post
