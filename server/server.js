@@ -3,6 +3,7 @@ var pg = require('pg');
 var bodyParser = require('body-parser');
 var app = express();
 var path = require('path');
+var async = require('async');
 
 app.use(bodyParser.json());
 
@@ -31,8 +32,94 @@ app.get('/about', function(req, res) {
 	res.render('pages/about');
 });
 
+// Get Property list
+app.get('/api/get_properties', (req, res) => {
+	getProperties(function(result) {
+		res.send(result);
+	});
+});
 
+// Get Properties
+function getProperties(callback) {
+	var client = new pg.Client(conString);
+	client.connect(function(err) {
+		if (err) {
+			console.log("Error in /api/get_properties: " + err);
+			callback({error: err, data: []});
+			client.end();
+		}
+		else {
+			client.query('select * from property', function(err, result) {
+				if (err) {
+					console.log(err);
+					callback({error:err, data: []});
+					client.end();
+				}
+				else {
+					callback({error: '', data: result.rows});
+					client.end();
+				}
+			})
+		}
+	});
+}
 
+// Get Property by ID
+app.get('/api/get_property/:id', (req, res) => {
+	var id = req.params.id; 
+	getPropertyById(id, function(result) {
+		res.send(result);
+	});
+});
+
+// Get Property by Id
+function getPropertyById(id, callback) {
+	var client = new pg.Client(conString);
+	client.connect(function(err) {
+		if (err) {
+			console.log("Error in /api/get_property/" + id  + ": " + err);
+			callback({error: err, data: []});
+			client.end();
+		}
+		else {
+			client.query("select * from property where id='"+id+"'", function(err, result) {
+				if (err) {
+					console.log(err);
+					callback({error:err, data: []});
+					client.end();
+				}
+				else {
+					callback({error: '', data: result.rows});
+					client.end();
+				}
+			});
+		}
+	});
+}
+
+// Get Property list
+/*
+app.get('/api/get_properties', (req, res) => {
+	var client = new pg.Client(conString);
+	client.connect(function(err) {
+		if (err) {
+			console.log("Error in /api/get_properties: " + err);
+			res.render('error', {error: err});
+		}
+		else {
+			client.query('select * from property', function(err, result) {
+				if (err) {
+					console.log(err);
+					res.send('error', {error:err});
+				}
+				else {
+					res.send(result.rows);
+				}
+			})
+		}
+	})
+});
+*/
 // React PROD build
 // app.use('/static', express.static(path.resolve(__dirname + '\\..\\client\\build\\static')));
 // app.get('/', (req, res) => {
